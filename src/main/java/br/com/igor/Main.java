@@ -37,25 +37,31 @@ public class Main {
 
         EmployeeDateUtils utils = new EmployeeDateUtils(sales);
 
-        List<EmployeeWithBenefits> employeesWithBenefits = employees.stream()
-                .filter(Employee::haveBenefits)
-                .map(employee -> (EmployeeWithBenefits) employee)
+        List<Employee> employeesWithBenefits = employees.stream()
+                .filter(employee -> employee.getEmployeeType() == EmployeeType.WITH_BENEFITS)
                 .collect(Collectors.toList());
 
 
 
 
-       System.out.println( "Valor pago Mensal com beneficios: " + utils.getTotalSalaryPaidInMonth(employees, 3,2016));
+       System.out.println( "Valor pago Mensal com beneficios: " + utils.getTotalSalaryPaidInMonth(employees, 3,2022));
 
-      System.out.println( "Valor pago Mensal sem beneficios: " + utils.getTotalSalaryPaidInMonthWithoutBenefits(employees, 3,2016));
+      System.out.println( "Valor pago Mensal sem beneficios: " + utils.getTotalSalaryPaidInMonthWithoutBenefits(employees, 3,2022));
 
-      System.out.println( "Valor pago Mensal somente beneficios: " + utils.getAmountOfTheBenefitsPerMount(employeesWithBenefits, 3,2016));
-
-       System.out.println( "O Maior valor no mes foi: " + utils.getEmployeeWithTopSalary(employees, 7,2022));
+      System.out.println( "Valor pago Mensal somente beneficios: " + utils.getAmountOfTheBenefitsPerMount(employeesWithBenefits, 3,2022));
 
 
+        Employee topSalary = utils.getEmployeeWithTopSalary(employees, 3,2022);
 
 
+        System.out.println( "O funcionario que mais recebeu em Salarios e beneficios no mes foi: "
+               + "name: " + topSalary.getName()
+               + " position: " + topSalary.getPosition()
+               + " salary: " + topSalary.currentSalary(3,2022));
+
+
+
+        System.out.println( utils.highestBenefitPaid(employeesWithBenefits, 3,2022));
     }
 
 
