@@ -11,31 +11,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeTest {
 
-    Employee s1 = new Secretary("teste1", LocalDate.of(2000,1,1));
+    Secretary secretary = new Secretary("Jorge Carvalho",LocalDate.of(2018,1,1));
+    Secretary secretary1 = new Secretary("Maria Souza",LocalDate.of(2015,12,1));
+
     Vendor vendor = new Vendor("Ana Silva ",LocalDate.of(2021,12,1));
     Vendor vendor1 = new Vendor("Joao Mendes",LocalDate.of(2021,12,1));
 
+
     Manager manager = new Manager("Juliana Alves",LocalDate.of(2017,7,1));
     Manager manager1 = new Manager("Bento Albino",LocalDate.of(2014,3,1));
-
     List<Sale> sales = SalesData.getSales(vendor,vendor1);
     @Test
     public void currentSalary(){
-        s1.setSalary(1000.0);
-        assertEquals(1000,s1.currentSalary(1,2000));
-        assertEquals(37000,s1.currentSalary(1,2036));
-        vendor.setSalary(1000.00);
-        assertEquals(6400.0,vendor.currentSalary(12,2024));
-        assertEquals(50000.0,manager1.currentSalary(3,2024));
+        assertEquals(11000,secretary.currentSalary(12,2022));
+        assertEquals(13000,secretary1.currentSalary(12,2021));
+        assertEquals(13800,vendor.currentSalary(12,2022));
+        assertEquals(50000.0,manager1.currentSalary(12,2024));
 
 
     }
 
     @Test
     public void currentSalaryWithBonusSecretary(){
-        Secretary s1 = new Secretary("teste1", LocalDate.of(2000,1,1));
-        s1.setSalary(1000.0);
-        assertEquals(13200.0,s1.calculateSecretaryBonus(1,2010));
+        assertEquals(13200.0,secretary.calculateSecretaryBonus(12,2022));
+        assertEquals(16800.0,secretary1.calculateSecretaryBonus(12,2022));
     }
 
     @Test
@@ -64,9 +63,9 @@ class EmployeeTest {
 
     @Test
     public void currentSalaryWithBonusVendor(){
-        vendor.setSalary(1000.0);
-        assertEquals(2560.0,vendor.currentSalaryWithVendorBonus(sales,12,2021));
-        assertEquals(1000.0,vendor.currentSalaryWithVendorBonus(sales,5,2022));
+        assertEquals(13560.0,vendor.currentSalaryWithVendorBonus(sales,12,2021));
+        assertEquals(13800.0,vendor.currentSalaryWithVendorBonus(sales,12,2022));
+        assertEquals(13800.0,vendor1.currentSalaryWithVendorBonus(sales,12,2022));
 
     }
 

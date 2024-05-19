@@ -3,7 +3,7 @@ package br.com.igor;
 import br.com.igor.entities.employee.*;
 import br.com.igor.entities.sale.Sale;
 import br.com.igor.entities.sale.SalesData;
-import br.com.igor.services.EmployeeDateUtils;
+import br.com.igor.services.EmployeeServices;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,8 +34,12 @@ public class Main {
 
         List<Sale> sales = SalesData.getSales(vendor,vendor1);
 
+        List<Vendor> vendors = new ArrayList<>();
+        vendors.add(vendor);
+        vendors.add(vendor1);
 
-        EmployeeDateUtils utils = new EmployeeDateUtils(sales);
+
+        EmployeeServices utils = new EmployeeServices(sales);
 
         List<Employee> employeesWithBenefits = employees.stream()
                 .filter(employee -> employee.getEmployeeType() == EmployeeType.WITH_BENEFITS)
@@ -44,14 +48,10 @@ public class Main {
 
 
 
-       System.out.println( "Valor pago Mensal com beneficios: " + utils.getTotalSalaryPaidInMonth(employees, 3,2022));
-
-      System.out.println( "Valor pago Mensal sem beneficios: " + utils.getTotalSalaryPaidInMonthWithoutBenefits(employees, 3,2022));
-
-      System.out.println( "Valor pago Mensal somente beneficios: " + utils.getAmountOfTheBenefitsPerMount(employeesWithBenefits, 3,2022));
 
 
-        Employee topSalary = utils.getEmployeeWithTopSalary(employees, 3,2022);
+
+        Employee topSalary = utils.getEmployeeWithTopSalary(employees, 12,2022);
 
 
         System.out.println( "O funcionario que mais recebeu em Salarios e beneficios no mes foi: "
@@ -59,10 +59,12 @@ public class Main {
                + " position: " + topSalary.getPosition()
                + " salary: " + topSalary.currentSalary(3,2022));
 
+        utils.bestVendor(vendors, 12,2027);
+        employees.forEach(employee -> System.out.println(employee.getName()+ " " + employee.getSalary()));
 
-
-        System.out.println( utils.highestBenefitPaid(employeesWithBenefits, 3,2022));
     }
+
+
 
 
 }

@@ -32,6 +32,16 @@ public class Vendor extends Employee{
         return  0.0;
     }
 
+    public Double getTotalSales(List<Sale> sales,int month, int year){
+        List<Sale> ownSales = filterSalesByVendor(sales, month, year);
+
+        if(!ownSales.isEmpty()){
+            return ownSales.stream()
+                    .mapToDouble(Sale::getSaleAmount)
+                    .sum();        }
+        return  0.0;
+    }
+
     public List<Sale> filterSalesByVendor(List<Sale> sales,int month, int year){
         List<Sale> filteredSales = new ArrayList<>(sales);
 

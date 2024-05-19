@@ -3,7 +3,7 @@ package br.com.igor.entities.employee;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public abstract  class Employee {
+public abstract class Employee {
 
 
     private String position;
