@@ -18,7 +18,7 @@ Desáfio proposto pela empresa Sinerj com intuido de criar uma aplicação simpl
 
 Neste Projeto Foi Proposto a ultização da linguagem java a qual foi ultilizada na sua versão 20.
 
-foi ultilizado também Junit5 para a realização de testes unitários
+foi ultilizado também Junit5 para a realização de testes unitários.
 
 
 
